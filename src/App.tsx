@@ -1,48 +1,27 @@
-import {useEffect, useMemo, useState} from "react";
+import React from "react";
+import {Home} from "./components/Home.tsx";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {About} from "./components/About.tsx";
+import {Docs} from "./components/Docs.tsx";
 
-const URL = 'https://api.coingecko.com/api/v3/' +
-    'simple/price?ids=bitcoin&vs_currencies=usd,eur';
-type Rates = {
-  usd: number;
-  eur: number;
-}
-
-type Currency = 'usd' | 'eur';
 
 export function App() {
-  const [rates, setRates] = useState<Rates>()
-  const [c, st] = useState<number>(0)
-
-  useEffect(() => {
-    // passa primer
-    fetch(URL)
-        .then(res => res.json())
-        .then(data => {
-          // passa segon
-          setRates(data.bitcoin);
-        })
-  }, [])
-
-  const [cur, setCur] = useState<Currency>('usd')
-
-  const value = useMemo(() => {
-    // pasasria primer, despres del segon
-    return rates && rates[cur];
-  }, [rates, cur]);
-
-  function switchCurrency() {
-    setCur(cur === 'usd' ? 'eur' : 'usd')
-  }
-  if (!rates || !value ) return <p>Loading...</p>
-  // passara despres del segon
-  return (
-      <p>
-        Current {cur} rate is: {value}
-        <button onClick={switchCurrency}>
-          Switch currency
-        </button>
-        <button onClick={() => st(c + 1)}>
-          Set count        </button>
-      </p>
-  )
+    return <BrowserRouter>
+        <nav>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/docs">Docs</Link>
+        </nav>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="about/" element={<About/>}/>
+            <Route path="docs/" element={<Docs/>}>
+                <Route path="" element={<>Go to home</>}/>
+                <Route path="home" element={<Home/>}/>
+                <Route path="about" element={<About/>}/>
+                <Route path="*" element={<h1>Doc not found </h1>}/>
+            </Route>
+            <Route path="*" element={<h1>404</h1>}/>
+        </Routes>
+    </BrowserRouter>
 }

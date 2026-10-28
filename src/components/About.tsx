@@ -19,12 +19,12 @@ export function About() {
             setUser(emailInput, passInput);
             e.preventDefault();
         }}>
-            <input type="text" name="email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)}
+            <input type="text" role='input' name="email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)}
                    placeholder="email"/>
-            <input type="password" name="password" value={passInput} onChange={(e) => setPassInput(e.target.value)}
+            <input type="password" role='input'  name="password" value={passInput} onChange={(e) => setPassInput(e.target.value)}
                    placeholder="password"/>
             <button type="submit" aria-label={'submit form'}>Submit</button>
-            <button type="button" onClick={onClean}>Clean</button>
+            <button type="button" aria-label={'clean'} onClick={onClean}>Clean</button>
         </form>
         <>email is : <b aria-label={'email content'}>{email}</b> and pass is :<b aria-label={'password content'}>{password}</b> </>
     </>

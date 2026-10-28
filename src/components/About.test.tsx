@@ -16,6 +16,20 @@ describe('About Component', () => {
         expect(screen.getByLabelText("password content").textContent).toEqual("password");
         expect(screen.getByLabelText("email content").textContent).toEqual("hola@hola.com");
     })
+
+
+    it('shoudl clean input when clicking button', async () => {
+
+
+        render(<About/>);
+
+        await userEvent.click(screen.getByLabelText('clean'));
+
+        screen.logTestingPlaygroundURL();
+
+        expect(screen.getByPlaceholderText("password").textContent).toEqual("");
+        expect(screen.getByPlaceholderText("email").textContent).toEqual("");
+    })
     it('does not show the password when the form is not submitted', async () => {
 
         // checking render  using state from  useUserDate

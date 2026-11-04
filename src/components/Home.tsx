@@ -21,7 +21,7 @@ export function Home() {
     // passara despres del segon
     return (
         <p>
-            Current {cur} rate is: {value}
+            Current {cur} rate is: <span data-testid="currency-value">{value}</span>
             <button onClick={switchCurrency}>
                 Switch currency
             </button>

@@ -20,11 +20,13 @@ export function Home() {
     if (!rates || !value) return <p>Loading...</p>
     // passara despres del segon
     return (
-        <p>
-            Current {cur} rate is: <span data-testid="currency-value">{value}</span>
-            <button onClick={switchCurrency}>
-                Switch currency
-            </button>
-        </p>
+        <>
+            <p>
+                Current {cur} rate is: <span data-testid="currency-value">{value}</span>
+                <button onClick={switchCurrency}>
+                    Switch currency
+                </button>
+            </p>
+        </>
     )
 }
